@@ -27,7 +27,7 @@ exports.findByPetId = function (req, res) {
             http.get({
               hostname: 'localhost',
               port: 3001,
-              path: '/api/users/1',
+              path: '/api/users/'+response.owner,
               agent: false  // create a new agent just for this one request
             }, (responseUser) => {
               // Do stuff with response
