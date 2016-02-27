@@ -34,7 +34,7 @@ pets.route('/pets/')
 	.post(PetsCtrl.addPets);
 
 pets.route('/pets/:pet')
-	.get(PetsCtrl.findByName)
+	.get(PetsCtrl.findByPetId)
 	.put(PetsCtrl.updatePets)
 	.delete(PetsCtrl.deletePets);
 

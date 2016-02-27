@@ -1,5 +1,6 @@
 //File: controllers/pets.js
-var mongoose = require('mongoose');  
+var mongoose = require('mongoose');
+var http = require('http');  
 var Pets  = mongoose.model('Pets');
 
 //GET - Return all pets in the DB
@@ -13,7 +14,7 @@ exports.findAllPetss = function(req, res) {
 };
 
 //GET - Return a pet with specified ID
-exports.findByName = function (req, res) {
+exports.findByPetId = function (req, res) {
     Pets.findOne({
         pet: req.params.pet
     }, function (error, response) {
@@ -23,10 +24,24 @@ exports.findByName = function (req, res) {
                 message: 'not found'
             });
         } else {
-            res.send({
+            http.get({
+              hostname: 'localhost',
+              port: 3001,
+              path: '/api/users/1',
+              agent: false  // create a new agent just for this one request
+            }, (responseUser) => {
+              // Do stuff with response
+              responseUser.on("data", function(user) {
+                response.ownerObject = JSON.parse(user);
+              console.log("Respuesta " + user);
+              res.send({
                 success: true,
                 pet: response
             });
+  });
+              
+        })
+            
         }
     });
 }

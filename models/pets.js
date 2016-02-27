@@ -7,7 +7,8 @@ exports = module.exports = function(app, mongoose) {
     genre:       { type: String, enum:
       ['Perro', 'Gato']
     },
-    owner:       { type: Number }
+    owner:       { type: Number },
+    ownerObject: {}
   });
 
   mongoose.model('Pets', petSchema);
