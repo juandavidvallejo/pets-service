@@ -29,7 +29,7 @@ exports.findByPetId = function (req, res) {
               port: 3001,
               path: '/api/users/'+response.owner,
               agent: false  // create a new agent just for this one request
-            }, (responseUser) => {
+            }, function(responseUser) {
               // Do stuff with response
               responseUser.on("data", function(user) {
                 response.ownerObject = JSON.parse(user);
